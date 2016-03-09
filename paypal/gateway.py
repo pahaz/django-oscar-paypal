@@ -27,11 +27,11 @@ def post(url, params):
 
     # Convert response into a simple key-value format
     pairs = {}
-    for key, value in parse_qsl(response.content):
- #       if isinstance(key, six.binary_type):
- #           key = key.decode('utf8')
- #       if isinstance(value, six.binary_type):
- #           value = value.decode('utf8')
+    for key, value in parse_qsl(response.content.encode('ASCII')):
+        if isinstance(key, six.binary_type):
+            key = key.decode('utf8')
+        if isinstance(value, six.binary_type):
+            value = value.decode('utf8')
         pairs[key] = value
 
     # Add audit information
