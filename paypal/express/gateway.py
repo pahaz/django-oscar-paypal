@@ -343,11 +343,10 @@ def set_txn(basket, shipping_methods, currency, return_url, cancel_url, update_u
 
     # Construct return URL
     if getattr(settings, 'PAYPAL_SANDBOX_MODE', True):
-        url = 'https://www.sandbox.paypal.com/webscr'
+        url = 'https://www.sandbox.paypal.com/checkoutnow/2'
     else:
-        url = 'https://www.paypal.com/webscr'
-    params = (('cmd', '_express-checkout'),
-              ('token', txn.token),)
+        url = 'https://www.paypal.com/checkoutnow/2'
+    params = (('token', txn.token),)
     return '%s?%s' % (url, urlencode(params))
 
 

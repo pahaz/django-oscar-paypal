@@ -109,7 +109,7 @@ class RedirectToPayPalTests(MockedPayPalTests):
         self.assertEqual('www.sandbox.paypal.com', self.url.host())
 
     def test_query_params_present(self):
-        params = ['cmd', 'token']
+        params = ['token']
         self.assertTrue(self.url.has_query_params(params))
 
 
