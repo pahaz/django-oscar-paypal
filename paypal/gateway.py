@@ -26,9 +26,11 @@ def post(url, params):
         raise exceptions.PayPalError("Unable to communicate with PayPal")
 
     # Convert response into a simple key-value format
-    #print(response.content)
     pairs = {}
-    for key, value in parse_qsl(response.content):
+    content = response.content
+    if isinstance(content, six.binary_type):
+        content = content.decode('utf8')
+    for key, value in parse_qsl(content):
         if isinstance(key, six.binary_type):
             key = key.decode('utf8')
         if isinstance(value, six.binary_type):
